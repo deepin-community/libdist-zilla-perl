@@ -1,0 +1,103 @@
+libdist-zilla-perl (6.005-1) unstable; urgency=low
+
+  From the upstream Changes file:
+
+  [THIS RELEASE MIGHT BREAK YOUR BUILD]
+
+  - Path::Class has been excised in favor of Path::Tiny, exposed as
+    Dist::Zilla::Path; it will still respond to ->subdir and ->file, but
+    only until Dist::Zilla v7 -- fix your plugins by then!
+
+  - The --verbose switch to dzil is now strictly on/off.  To set
+    verbosity on a per-plugin basis, use the -V switch.  Unfortunately,
+    per-plugin verbosity seems to have been broken for some time, anyway.
+
+  - The plugins [Prereq] and [AutoPrereq] and [BumpVersion] have been
+    removed.  These were long deprecated.  (Don't confuse Prereq, for
+    example, with the plural Prereqs, which is the correct plugin.)
+
+  - [PkgVersion] now supports a use_package argument which will put the
+    version in the package statement.  (Remember that this syntax was
+    introduced in perl v5.12.0.)
+
+  - Dist::Zilla now requires perl v5.14.0.  It will still happily build
+    dists that run on whatever version of perl you like.
+
+  - Using a Dist::Zilla::Path like a Path::Class object now issues a
+    deprecation warning ("this will be removed") once per call site.
+
+ -- Axel Beckert <abe@debian.org>  Wed, 25 May 2016 21:34:45 +0200
+
+libdist-zilla-perl (5.006-1) unstable; urgency=low
+
+  [THIS RELEASE MIGHT BREAK YOUR BUILD]
+  - all files now have content, encoded_content, and encoding attributes
+  - the Encoding plugin and EncodingProvider role have been added to
+    allow you to set the encoding on files; the default is UTF-8
+  - config.ini is assumed to be in UTF-8
+  - Data::Section sections are assumed to be UTF-8
+  - the Term chrome should encode input and output
+  - perform encoding steps during listdeps
+  - by default, NextRelease now adds a trial release marker on trial
+    releases
+
+ -- Florian Schlichting <fsfs@debian.org>  Tue, 26 Nov 2013 21:43:00 +0100
+
+libdist-zilla-perl (4.101612-1) unstable; urgency=low
+
+  From upstream Changes:
+
+  4.101540  2010-06-03 23:52:52 America/New_York
+
+  INCOMPATIBLE CHANGES:
+
+  New global config system!
+
+  Your ~/.dzil/config.ini is now broken.  Running `dzil` should tell
+  you how to fix it.  Probably just replace [!release] with [%PAUSE]
+  and delete everything else.  Hope that helps!
+
+  Major refactoring of our use of Config::MVP; this probably won't
+  break anything unless you wrote your own config readers, which I'm
+  pretty sure you haven't done!
+
+  config parameters beginning with a colon are not passed to plugins
+  (this should not really affect anyone)
+
+ -- Ansgar Burchardt <ansgar@43-1.org>  Tue, 15 Jun 2010 22:18:15 +0900
+
+libdist-zilla-perl (3.101461-1) unstable; urgency=low
+
+  From upstream Changes:
+
+  3.101390  2010-05-19 09:15:32 America/New_York
+            INCOMPATIBLE CHANGES:
+
+            the as_distmeta method of Prereqs is removed
+
+            the ->prereq method on Dist::Zilla is gone (only prereqs remains)
+
+            distmeta is managed by CPAN::Meta, which expects v2 spec data by
+            default
+
+            most Dist::Zilla::Types are gone, now in MooseX::Types::Perl
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 29 May 2010 13:45:39 +0200
+
+libdist-zilla-perl (2.100960-1) unstable; urgency=low
+
+  From upstream Changes (2.100861):
+
+    INCOMPATIBLE CHANGES:
+
+    the AllFiles plugin is now known as GatherDir
+
+    the InstallDirs plugin has been replaced by ExecDir and ShareDir
+
+    the PodTests plugin has been replaced by PodCoverageTests and
+    PodSyntaxTests
+
+    the FixedPrereq role is replaced with PrereqSource
+
+
+ -- gregor herrmann <gregoa@debian.org>  Tue, 30 Mar 2010 18:42:56 +0200

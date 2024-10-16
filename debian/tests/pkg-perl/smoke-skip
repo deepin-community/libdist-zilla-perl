@@ -1,0 +1,4 @@
+# Tries to find Perl modules in build directory and its functionality
+# is covered by pkg-perl-autopkgtest's default tests anyways, so skip
+# it.
+t/compile.t

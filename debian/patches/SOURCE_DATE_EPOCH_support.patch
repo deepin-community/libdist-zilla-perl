@@ -1,0 +1,30 @@
+Description: Add support for SOURCE_DATE_EPOCH
+ This allows one to use Dist::Zilla in reproducible builds. One package
+ that will benefit from this patch is librun-parts-perl.
+Forwarded: not yet
+Author: Axel Beckert <abe@debian.org>
+Reviewed-by: gregor herrmann <gregoa@debian.org>
+Last-Update: 2022-12-22
+
+--- a/lib/Dist/Zilla.pm
++++ b/lib/Dist/Zilla.pm
+@@ -441,7 +441,7 @@
+     # rjbs, 2008-06-13
+     my $stash = $_[0]->stash_named('%Rights');
+     my $year  = $stash && $stash->copyright_year;
+-    return( $year // (localtime)[5] + 1900 );
++    return( $year // (localtime($ENV{SOURCE_DATE_EPOCH} || time))[5] + 1900 );
+   }
+ );
+ 
+--- a/lib/Dist/Zilla/Plugin/DistINI.pm
++++ b/lib/Dist/Zilla/Plugin/DistINI.pm
+@@ -89,7 +89,7 @@
+     $content .= sprintf "author  = %s\n", $_ for @{ $zilla->authors };
+     $content .= sprintf "license = %s\n", $license;
+     $content .= sprintf "copyright_holder = %s\n", $zilla->copyright_holder;
+-    $content .= sprintf "copyright_year   = %s\n", (localtime)[5] + 1900;
++    $content .= sprintf "copyright_year   = %s\n", (localtime($ENV{SOURCE_DATE_EPOCH} || time))[5] + 1900;
+     $content .= "\n";
+ 
+     $content .= $postlude;
