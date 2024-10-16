@@ -2,3 +2,6 @@
 
 %:
 	dh $@
+
+override_dh_auto_test:
+	TZ=UTC dh_auto_test -- TEST_VERBOSE=0
